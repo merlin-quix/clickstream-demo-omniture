@@ -41,6 +41,41 @@ deployments:
         description: ''
         required: true
         value: M3rl1n-06
+  - name: Enrich with Demographic Details
+    application: Enrich with Demographic Details
+    deploymentType: Service
+    version: 6462cb506f0d8c68b829124ec6bab1d3d27dd203
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: clickstream-raw-simple
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic to write data to
+        required: true
+        value: clickstream-userenriched-simple
+      - name: redishost
+        inputType: FreeText
+        description: ''
+        required: true
+        value: redis-13908.c304.europe-west1-2.gce.cloud.redislabs.com
+      - name: redisuser
+        inputType: FreeText
+        description: ''
+        required: true
+        value: clickstreamboy
+      - name: redispw
+        inputType: FreeText
+        description: ''
+        required: false
+        value: M3rl1n-06
 
 # This section describes the Topics of the data pipeline
 topics:
