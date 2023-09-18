@@ -34,10 +34,7 @@ shutting_down = False
 
 # Quix Platform injects credentials automatically to the client.
 # Alternatively, you can always pass an SDK token manually as an argument.
-client = qx.QuixStreamingClient('sdk-8c379dcac1d64713b2787faa520cd808')
-
-# print("Using local kafka")
-# client = qx.KafkaStreamingClient('127.0.0.1:9092')
+client = qx.QuixStreamingClient()
 
 # The producer topic is where the data will be published to
 # It's the output from this demo data source code.
