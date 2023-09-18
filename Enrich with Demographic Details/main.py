@@ -12,7 +12,7 @@ topic_producer = client.get_topic_producer(os.environ["output"])
 # Create a Redis client
 r = redis.Redis(
   host=os.environ["redishost"],
-  port=11226,
+  port=13908,
   username=os.environ["redisuser"],
   password=os.environ["redispw"])
 
