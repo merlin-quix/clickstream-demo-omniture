@@ -160,3 +160,10 @@ topics:
       replicationFactor: 2
       retentionInMinutes: 480
       retentionInBytes: 104857600
+  - name: clickstream-raw-simple
+    persisted: false
+    configuration:
+      partitions: 2
+      replicationFactor: 2
+      retentionInMinutes: 60
+      retentionInBytes: 73400320
