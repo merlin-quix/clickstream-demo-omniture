@@ -19,7 +19,7 @@ variables:
   - name: redispw
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: M3rl1n-06
     required: true
 dockerfile: build/dockerfile
 runEntryPoint: main.py
