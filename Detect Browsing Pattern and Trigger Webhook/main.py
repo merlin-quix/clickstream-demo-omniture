@@ -5,6 +5,7 @@ from collections import defaultdict
 import requests
 import os
 from collections import deque
+from datetime import datetime
 
 # Initialize Kafka consumer
 client = qx.QuixStreamingClient()
