@@ -7,17 +7,10 @@ client = qx.QuixStreamingClient()
 
 topic_consumer = client.get_topic_consumer(os.environ["input"], consumer_group = "category-counts")
 
-# Initialize Redis connection
-r = redis.Redis(
-  host='redis-13263.c304.europe-west1-2.gce.cloud.redislabs.com',
-  port=13263,
-  username='csaggregator',
-  password='M3rl1n-06')
-
 # Create a Redis client
 r = redis.Redis(
   host=os.environ["redishost"],
-  port=11226,
+  port=13263,
   username=os.environ["redisuser"],
   password=os.environ["redispw"])
 
