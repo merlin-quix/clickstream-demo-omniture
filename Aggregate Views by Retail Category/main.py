@@ -14,6 +14,14 @@ r = redis.Redis(
   username='csaggregator',
   password='M3rl1n-06')
 
+# Create a Redis client
+r = redis.Redis(
+  host=os.environ["redishost"],
+  port=11226,
+  username=os.environ["redisuser"],
+  password=os.environ["redispw"])
+
+
 def on_dataframe_received_handler(stream_consumer: qx.StreamConsumer, df: pd.DataFrame):
 
     # Transform data frame here in this method. You can filter data or add new features.
