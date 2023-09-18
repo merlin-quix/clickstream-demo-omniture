@@ -5,7 +5,7 @@ import redis
 
 client = qx.QuixStreamingClient()
 
-topic_consumer = client.get_topic_consumer('clickstream-cats', consumer_group = "category-counts")
+topic_consumer = client.get_topic_consumer(os.environ["input"], consumer_group = "category-counts")
 
 # Initialize Redis connection
 r = redis.Redis(
