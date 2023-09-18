@@ -14,7 +14,7 @@ variables:
   - name: redishost
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: redis-13908.c304.europe-west1-2.gce.cloud.redislabs.com
     required: true
   - name: redisuser
     inputType: FreeText
