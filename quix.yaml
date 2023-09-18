@@ -94,7 +94,7 @@ topics:
       retentionInMinutes: 480
       retentionInBytes: 52428800
   - name: clickstream-cats
-    persisted: false
+    persisted: true
     configuration:
       partitions: 2
       replicationFactor: 2
