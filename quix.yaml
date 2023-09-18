@@ -139,13 +139,6 @@ deployments:
 
 # This section describes the Topics of the data pipeline
 topics:
-  - name: clickstream-raw
-    persisted: true
-    configuration:
-      partitions: 2
-      replicationFactor: 2
-      retentionInMinutes: 480
-      retentionInBytes: 73400320
   - name: clickstream-userenriched
     persisted: true
     configuration:
