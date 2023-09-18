@@ -19,7 +19,7 @@ variables:
   - name: redisuser
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: quixtut
     required: true
   - name: redispw
     inputType: InputTopic
