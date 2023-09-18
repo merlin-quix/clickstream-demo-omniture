@@ -153,3 +153,10 @@ topics:
       replicationFactor: 2
       retentionInMinutes: 60
       retentionInBytes: 73400320
+  - name: clickstream-userenriched
+    persisted: false
+    configuration:
+      partitions: 2
+      replicationFactor: 2
+      retentionInMinutes: 480
+      retentionInBytes: 104857600
