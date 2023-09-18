@@ -44,7 +44,7 @@ deployments:
   - name: Enrich with Demographic Details
     application: Enrich with Demographic Details
     deploymentType: Service
-    version: b93c6b9b328bfa34f35579960343dc39b375ed94
+    version: 6462cb506f0d8c68b829124ec6bab1d3d27dd203
     resources:
       cpu: 200
       memory: 500
