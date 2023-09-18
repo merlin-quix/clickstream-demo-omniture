@@ -121,6 +121,21 @@ deployments:
         description: This is the input topic to read data from
         required: true
         value: clickstream-raw
+  - name: Detect Demographics and Trigger Webhook II
+    application: Detect Demographics and Trigger Webhook II
+    deploymentType: Service
+    version: 978201ce00e06a20b6418f6deea1d8ad4dc5a572
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 2
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: clickstream-userenriched
 
 # This section describes the Topics of the data pipeline
 topics:
