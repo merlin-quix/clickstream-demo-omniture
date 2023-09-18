@@ -12,9 +12,9 @@ variables:
     defaultValue: redis-13263.c304.europe-west1-2.gce.cloud.redislabs.com
     required: true
   - name: redisuser
-    inputType: InputTopic
+    inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: csaggregator
     required: true
   - name: redispw
     inputType: FreeText
