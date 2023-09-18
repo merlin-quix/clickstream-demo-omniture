@@ -9,14 +9,19 @@ import threading
 import zipfile
 
 # Specify the path to the ZIP file and the extraction directory
-# zip_file_path = 'retail-store-logs-sample-data.zip'
-# extract_dir = '.'
-#
-# # Open the ZIP file and extract its contents
-# with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-#     zip_ref.extractall(extract_dir)
-#
-# print(f'Extracted all contents of {zip_file_path} to {extract_dir}')
+log_file_path = 'cleaned-omniture-logs.zip'
+users_file_path = 'users.zip'
+extract_dir = '.'
+
+# Open the ZIP files and extract their contents (yes this is hacky, bad code)
+with zipfile.ZipFile(log_file_path, 'r') as zip_ref:
+     zip_ref.extractall(extract_dir)
+     print(f'Extracted all contents of {log_file_path} to {extract_dir}')
+     
+with zipfile.ZipFile(users_file_path, 'r') as zip_ref:
+     zip_ref.extractall(extract_dir)
+     print(f'Extracted all contents of {users_file_path} to {extract_dir}')
+
 
 # True = keep original timings.
 # False = No delay! Speed through it as fast as possible.
@@ -39,19 +44,17 @@ client = qx.QuixStreamingClient('sdk-8c379dcac1d64713b2787faa520cd808')
 print("Opening output topic")
 producer_topic = client.get_topic_producer('clickstream-0109b')
 
+
 # CREATE A NEW STREAM
 # A stream is a collection of data that belong to a single session of a single source.
-stream_producer = producer_topic.create_stream("demo-clickstream-data")
-
+# stream_producer = producer_topic.create_stream("omniture-logs")
+# stream_producer.properties.name = "Omniture Retail Logs"  # Give the stream a human readable name (for the data catalogue).
+# stream_producer.properties.location = "/omniture retail logs"  # Save stream in specific folder to organize your workspace.
 # Configure the buffer to publish data as desired.
 # In this case every 100 rows.
 # See docs for more options. Search "using-a-buffer"
-stream_producer.timeseries.buffer.time_span_in_milliseconds = 100
+# stream_producer.timeseries.buffer.time_span_in_milliseconds = 100
 
-# EDIT STREAM PROPERTIES
-stream_producer.properties.name = "Demo Clickstream Data"  # Give the stream a human readable name (for the data catalogue).
-stream_producer.properties.location = "/demo clickstream data"  # Save stream in specific folder to organize your workspace.
-# stream_producer.properties.metadata["version"] = "Version 1"  # Add stream metadata to add context to time series data.
 
 # counters for the status messages
 row_counter = 0
@@ -69,8 +72,12 @@ def publish_row(row):
 
     # add a new timestamp column with the current data and time
     df_row['Timestamp'] = datetime.now()
+    streamid = df_row['Visitor Unique ID'].iloc[0]
+    streamid = streamid.replace("{","").replace("}","")
 
     # publish the data to the Quix stream created earlier
+    stream_producer = producer_topic.get_or_create_stream(streamid)
+    stream_producer.timeseries.buffer.time_span_in_milliseconds = 100
     stream_producer.timeseries.publish(df_row)
 
     row_counter += 1
