@@ -1,5 +1,10 @@
+import quixstreams as qx
+import os
+import pandas as pd
+import redis
+from datetime import datetime
 
-client = qx.QuixStreamingClient('sdk-8c379dcac1d64713b2787faa520cd808',qx.AutoOffsetReset)
+client = qx.QuixStreamingClient()
 
 topic_consumer = client.get_topic_consumer('clickstream-raw', auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "user-lookup")
 topic_producer = client.get_topic_producer('clickstream-userenriched')
