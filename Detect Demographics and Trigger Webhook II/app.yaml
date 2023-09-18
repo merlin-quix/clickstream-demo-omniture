@@ -1,0 +1,11 @@
+name: Detect Demographics and Trigger Webhook II
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: This is the input topic to read data from
+    defaultValue: clickstream-raw
+    required: true
+dockerfile: build/dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
