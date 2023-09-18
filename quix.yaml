@@ -106,6 +106,21 @@ deployments:
         description: ''
         required: true
         value: M3rl1n-06
+  - name: Detect Browsing Pattern by IP and Trigger Webhook
+    application: Detect Browsing Pattern and Trigger Webhook
+    deploymentType: Service
+    version: e8fa02a7e1ba3c631fd70b4aeb37595882fd105f
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 2
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: clickstream-raw
 
 # This section describes the Topics of the data pipeline
 topics:
