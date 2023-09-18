@@ -124,7 +124,7 @@ deployments:
   - name: Detect Demographics and Trigger Webhook II
     application: Detect Demographics and Trigger Webhook II
     deploymentType: Service
-    version: 978201ce00e06a20b6418f6deea1d8ad4dc5a572
+    version: f38b332dac35584acf80976c6eef5716cf770b6a
     resources:
       cpu: 200
       memory: 500
