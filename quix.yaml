@@ -79,7 +79,7 @@ deployments:
   - name: Aggregate Views by Retail Category
     application: Aggregate Views by Retail Category
     deploymentType: Service
-    version: 3c4e38b221a421754030fe2d0b8163833445e719
+    version: 53c67a783143d41f7b873f876a3b428117e6ca72
     resources:
       cpu: 200
       memory: 500
