@@ -109,7 +109,7 @@ deployments:
   - name: Detect Browsing Pattern by IP and Trigger Webhook
     application: Detect Browsing Pattern and Trigger Webhook
     deploymentType: Service
-    version: e8fa02a7e1ba3c631fd70b4aeb37595882fd105f
+    version: 3ba65f2056493dcb776ef5bd644c2bb2769a24a8
     resources:
       cpu: 200
       memory: 500
