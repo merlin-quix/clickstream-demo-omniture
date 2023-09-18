@@ -5,7 +5,22 @@ metadata:
   version: 1.0
 
 # This section describes the Deployments of the data pipeline
-deployments: []
+deployments:
+  - name: Stream Omniture Retail Logs
+    application: Stream Omniture Retail Logs
+    deploymentType: Service
+    version: e290da10a877cef45b75d3319a82ced5c08fd33e
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic for realtime CSV data
+        required: true
+        value: clickstream-raw
 
 # This section describes the Topics of the data pipeline
 topics:
