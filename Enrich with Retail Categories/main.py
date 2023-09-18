@@ -8,7 +8,7 @@ import redis
 client = qx.QuixStreamingClient()
 
 # Use Input / Output topics to stream data in or out of your service
-topic_consumer = client.get_topic_consumer(os.environ["input"], consumer_group = "lookup-data")
+topic_consumer = client.get_topic_consumer(os.environ["input"], auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "lookup-data-id1")
 topic_producer = client.get_topic_producer(os.environ["output"])
 
 # Create a Redis client
