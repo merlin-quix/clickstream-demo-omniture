@@ -11,11 +11,11 @@ topic_producer = client.get_topic_producer('clickstream-userenriched')
 
 # Create a Redis client
 r = redis.Redis(
-  host='redis-13908.c304.europe-west1-2.gce.cloud.redislabs.com',
-  port=13908,
-  username='clickstreamboy',
-  password='M3rl1n-06')
-
+  host=os.environ["redishost"],
+  port=11226,
+  username=os.environ["redisuser"],
+  password=os.environ["redispw"])
+  
 # Function to fetch product name from Redis
 def get_user_gender(vuuid):
     vuuid = vuuid.replace('{', '').replace('}', '')
