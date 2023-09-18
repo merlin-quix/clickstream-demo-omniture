@@ -42,19 +42,7 @@ client = qx.QuixStreamingClient('sdk-8c379dcac1d64713b2787faa520cd808')
 # The producer topic is where the data will be published to
 # It's the output from this demo data source code.
 print("Opening output topic")
-producer_topic = client.get_topic_producer('clickstream-0109b')
-
-
-# CREATE A NEW STREAM
-# A stream is a collection of data that belong to a single session of a single source.
-# stream_producer = producer_topic.create_stream("omniture-logs")
-# stream_producer.properties.name = "Omniture Retail Logs"  # Give the stream a human readable name (for the data catalogue).
-# stream_producer.properties.location = "/omniture retail logs"  # Save stream in specific folder to organize your workspace.
-# Configure the buffer to publish data as desired.
-# In this case every 100 rows.
-# See docs for more options. Search "using-a-buffer"
-# stream_producer.timeseries.buffer.time_span_in_milliseconds = 100
-
+producer_topic = client.get_topic_producer(os.environ["output"])
 
 # counters for the status messages
 row_counter = 0
