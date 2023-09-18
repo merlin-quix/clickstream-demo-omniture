@@ -90,7 +90,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic to read data from
         required: true
-        value: clickstream-cats
+        value: clickstream-cats-simple
       - name: redishost
         inputType: FreeText
         description: ''
