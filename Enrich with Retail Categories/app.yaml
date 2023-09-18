@@ -9,7 +9,7 @@ variables:
   - name: output
     inputType: OutputTopic
     description: This is the output topic to write data to
-    defaultValue: clickstream-cats
+    defaultValue: clickstream-cats-simple
     required: true
   - name: redishost
     inputType: FreeText
