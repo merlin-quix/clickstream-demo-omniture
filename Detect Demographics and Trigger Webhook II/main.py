@@ -2,24 +2,26 @@ import quixstreams as qx
 import pandas as pd
 import time
 from collections import defaultdict
+from datetime import datetime, timedelta
 import requests
+import time
 import os
+import threading
 from collections import deque
-from datetime import timedelta
 
 # Initialize Kafka consumer
 client = qx.QuixStreamingClient()
 
-topic_consumer = client.get_topic_consumer(os.environ["input"], auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "window-calc")
+topic_consumer = client.get_topic_consumer(os.environ['input'], auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "window-calc3")
 
-# Initialize state
-ip_to_urls = defaultdict(list)
+# Initialize state for unique user IDs
+user_to_categories = defaultdict(lambda: {"age": None, "gender": None, "categories": []})
 
 # Initialize a deque to keep track of webhook calls
 webhook_calls = deque()
 
 # Placeholder for webhook URL
-webhook_url = 'https://hook.eu2.make.com/vdlchysoq63ejngltbji6co037wi748g'
+webhook_url = 'https://hook.eu2.make.com/b0yr6fsuhu4fmaeoghrtwtmeb0i05ah1'
 
 def call_webhook(webhook_url,ip_address,unique_urls):
     global webhook_calls
@@ -43,30 +45,35 @@ def call_webhook(webhook_url,ip_address,unique_urls):
     webhook_calls.append(current_time)
 
 
-def on_dataframe_received_handler(stream_consumer: qx.StreamConsumer, df: pd.DataFrame):
-    # Transform data frame here in this method. You can filter data or add new features.
-    # Parse the message
-    #print(df.to_markdown())
+from datetime import datetime, timedelta
+from collections import defaultdict
+
+# Initialize state for unique user IDs
+user_to_categories = defaultdict(lambda: {"age": None, "gender": None, "categories": []})
+
+def on_dataframe_received_handler(stream_consumer, df):
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ns')
     timestamp = df['timestamp'].iloc[0]
-    #print(f"TIMESTAMP: {timestamp}")
-    ip_address = df['IP Address'].iloc[0]
-    #print(f"IP ADDRESS: {ip_address}")
-    product_url = df['Product Page URL'].iloc[0]
-    print(f"Page Interaction: at {timestamp}, {ip_address} visited {product_url}")
-    #current_time = timestamp
+    unique_id = df['Visitor Unique ID'].iloc[0]
+    gender = df['UserGender'].iloc[0]
+    age = df['UserAge'].iloc[0]
+    category = df['Product Category'].iloc[0]
 
-    # Update state
-    ip_to_urls[ip_address] = [(url, vtime) for url, vtime in ip_to_urls[ip_address] if timestamp - vtime <= timedelta(minutes=60)]
-    ip_to_urls[ip_address].append((product_url, timestamp))
-    #print(ip_to_urls)
+    # Update user-specific information
+    user_data = user_to_categories[unique_id]
+    user_data["age"] = age
+    user_data["gender"] = gender
+    user_data["categories"] = [(cat, ctime) for cat, ctime in user_data["categories"] if timestamp - ctime <= timedelta(hours=1)]
+    user_data["categories"].append((category, timestamp))
 
-    # Check condition
-    unique_urls = len(set(url for url, _ in ip_to_urls[ip_address]))
-    if unique_urls >= 3:
-        # Trigger webhook
-        call_webhook(webhook_url, ip_address, unique_urls)
-        print(f'Triggered webhook for IP {ip_address} with {unique_urls} unique URLs.')
+    # Check conditions
+    if user_data["gender"] == 'F' and 25 <= user_data["age"] <= 35:
+        unique_categories = len(set(cat for cat, _ in user_data["categories"]))
+        if all(cat in [x[0] for x in user_data["categories"]] for cat in ["clothing", "shoes", "handbags"]):
+            # All conditions met, trigger the webhook
+            call_webhook(webhook_url, unique_id, unique_categories)
+            print(f'Triggered webhook for user {unique_id} matching all criteria.')
+
 
 # Handle event data from samples that emit event data
 def on_event_data_received_handler(stream_consumer: qx.StreamConsumer, data: qx.EventData):
