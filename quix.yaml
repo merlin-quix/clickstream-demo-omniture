@@ -5,7 +5,42 @@ metadata:
   version: 1.0
 
 # This section describes the Deployments of the data pipeline
-deployments: []
+deployments:
+  - name: Enrich with Retail Categories
+    application: Enrich with Retail Categories
+    deploymentType: Service
+    version: 7a8dcbe14d7c2cb220af087ce944a777d0325f71
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: clickstream-raw-simple
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic to write data to
+        required: true
+        value: clickstream-cats-simple
+      - name: redishost
+        inputType: FreeText
+        description: ''
+        required: true
+        value: redis-11226.c304.europe-west1-2.gce.cloud.redislabs.com
+      - name: redisuser
+        inputType: FreeText
+        description: ''
+        required: true
+        value: quixtut
+      - name: redispw
+        inputType: FreeText
+        description: ''
+        required: true
+        value: M3rl1n-06
 
 # This section describes the Topics of the data pipeline
 topics:
