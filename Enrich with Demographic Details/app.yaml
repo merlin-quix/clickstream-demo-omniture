@@ -22,9 +22,9 @@ variables:
     defaultValue: clickstreamboy
     required: true
   - name: redispw
-    inputType: InputTopic
+    inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: M3rl1n-06
     required: false
 dockerfile: build/dockerfile
 runEntryPoint: main.py
