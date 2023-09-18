@@ -76,36 +76,6 @@ deployments:
         description: ''
         required: false
         value: M3rl1n-06
-  - name: Aggregate Views by Retail Category
-    application: Aggregate Views by Retail Category
-    deploymentType: Service
-    version: 53c67a783143d41f7b873f876a3b428117e6ca72
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the input topic to read data from
-        required: true
-        value: clickstream-cats-simple
-      - name: redishost
-        inputType: FreeText
-        description: ''
-        required: true
-        value: redis-13263.c304.europe-west1-2.gce.cloud.redislabs.com
-      - name: redisuser
-        inputType: FreeText
-        description: ''
-        required: true
-        value: csaggregator
-      - name: redispw
-        inputType: FreeText
-        description: ''
-        required: true
-        value: M3rl1n-06
   - name: Detect Browsing Pattern by IP and Trigger Webhook
     application: Detect Browsing Pattern and Trigger Webhook
     deploymentType: Service
