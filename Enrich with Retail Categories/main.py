@@ -20,13 +20,16 @@ r = redis.Redis(
 
 # Function to fetch product name from Redis
 def get_product_name(product_id):
-    return r.get(product_id).decode('utf-8')
+    cat = r.get(product_id).decode('utf-8')
+    print(f"Found cat {cat} for product URL {product_id}")
+    return cat
 
 def on_dataframe_received_handler(stream_consumer: qx.StreamConsumer, df: pd.DataFrame):
 
     # Transform data frame here in this method. You can filter data or add new features.
     # Assume df is your dataframe and 'product_id' is the column with product IDs
     df['product_name'] = df['Product Page URL'].apply(get_product_name)
+    df = df[["timestamp","Product Page URL","product_name"]]
     # Pass modified data frame to output stream using stream producer.
     # Set the output stream id to the same as the input stream or change it,
     # if you grouped or merged data with different key.
