@@ -13,10 +13,10 @@ topic_producer = client.get_topic_producer(os.environ["output"])
 
 # Create a Redis client
 r = redis.Redis(
-  host='redis-11226.c304.europe-west1-2.gce.cloud.redislabs.com',
+  host=os.environ["redishost"],
   port=11226,
-  username='quixtut',
-  password='M3rl1n-06')
+  username=os.environ["redisuser"],
+  password=os.environ["redispw"])
 
 # Function to fetch product name from Redis
 def get_product_name(product_id):
@@ -26,7 +26,7 @@ def on_dataframe_received_handler(stream_consumer: qx.StreamConsumer, df: pd.Dat
 
     # Transform data frame here in this method. You can filter data or add new features.
     # Assume df is your dataframe and 'product_id' is the column with product IDs
-    df['product_name'] = df['col_13'].apply(get_product_name)
+    df['product_name'] = df['Product Page URL'].apply(get_product_name)
     # Pass modified data frame to output stream using stream producer.
     # Set the output stream id to the same as the input stream or change it,
     # if you grouped or merged data with different key.
