@@ -20,7 +20,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic to read data from
         required: true
-        value: clickstream-raw
+        value: clickstream-raw-simple
       - name: output
         inputType: OutputTopic
         description: This is the output topic to write data to
