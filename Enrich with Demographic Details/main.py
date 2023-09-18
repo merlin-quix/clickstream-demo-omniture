@@ -6,8 +6,8 @@ from datetime import datetime
 
 client = qx.QuixStreamingClient()
 
-topic_consumer = client.get_topic_consumer('clickstream-raw', auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "user-lookup")
-topic_producer = client.get_topic_producer('clickstream-userenriched')
+topic_consumer = client.get_topic_consumer(os.environ["input"], auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "user-lookup")
+topic_producer = client.get_topic_producer(os.environ["output"])
 
 # Create a Redis client
 r = redis.Redis(
@@ -15,7 +15,7 @@ r = redis.Redis(
   port=11226,
   username=os.environ["redisuser"],
   password=os.environ["redispw"])
-  
+
 # Function to fetch product name from Redis
 def get_user_gender(vuuid):
     vuuid = vuuid.replace('{', '').replace('}', '')
