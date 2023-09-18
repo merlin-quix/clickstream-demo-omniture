@@ -1,4 +1,4 @@
-name: Detect Browsing Pattern and Trigger Webhook
+name: Detect Browsing Pattern by IP and Trigger Webhook
 language: python
 variables:
   - name: input
