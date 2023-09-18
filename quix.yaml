@@ -9,7 +9,7 @@ deployments:
   - name: Enrich with Retail Categories
     application: Enrich with Retail Categories
     deploymentType: Service
-    version: 57b910f4ca2fb1c4a17677063d31903e9bc4c1f4
+    version: 7a8dcbe14d7c2cb220af087ce944a777d0325f71
     resources:
       cpu: 200
       memory: 500
