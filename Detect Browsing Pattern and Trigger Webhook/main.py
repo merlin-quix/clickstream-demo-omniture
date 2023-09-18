@@ -1,19 +1,15 @@
-from kafka import KafkaConsumer
 import quixstreams as qx
 import pandas as pd
 import time
-from datetime import datetime
 from collections import defaultdict
-from datetime import datetime, timedelta
 import requests
-import time
-import threading
+import os
 from collections import deque
 
 # Initialize Kafka consumer
 client = qx.QuixStreamingClient()
 
-topic_consumer = client.get_topic_consumer('clickstream-0109b', auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "window-calc3")
+topic_consumer = client.get_topic_consumer(os.environ["input"], auto_offset_reset=qx.AutoOffsetReset.Earliest, consumer_group = "window-calc")
 
 # Initialize state
 ip_to_urls = defaultdict(list)
