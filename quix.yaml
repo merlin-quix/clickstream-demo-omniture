@@ -138,11 +138,4 @@ deployments:
         value: clickstream-userenriched
 
 # This section describes the Topics of the data pipeline
-topics:
-  - name: clickstream-userenriched
-    persisted: true
-    configuration:
-      partitions: 2
-      replicationFactor: 2
-      retentionInMinutes: 480
-      retentionInBytes: 52428800
+topics: []
